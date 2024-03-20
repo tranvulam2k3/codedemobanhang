@@ -85,12 +85,12 @@ public class homeController {
 		model.addAttribute("sp", searchName);
 		return "home";
 	}
-	@GetMapping("/detel/{id}")
-	public String productByID(Model model , @PathVariable("id") int id) {
-		sanpham spbyid = sanphamMapper.productByID(id);
-		model.addAttribute("spbyid", spbyid);
-		return "productDetel";
-	}
+//	@GetMapping("/detel/{id}")
+//	public String productByID(Model model , @PathVariable("id") int id) {
+//		sanpham spbyid = sanphamMapper.productByID(id);
+//		model.addAttribute("spbyid", spbyid);
+//		return "productDetel";
+//	}
 	@GetMapping("/a")
 	public String a(Model model) {
 		List<hoten> ht = hotenMapper.hovaten();
@@ -101,5 +101,10 @@ public class homeController {
 		model.addAttribute("hoTenList", hoTenList);
 		return "test";
 	}
-	
+	@GetMapping("/{id}")
+	public String productByID(Model model , @PathVariable("id") int id) {
+		sanpham sp = sanphamMapper.productByID(id);
+		model.addAttribute("sp", sp);
+		return "productDetel";
+	}
 }

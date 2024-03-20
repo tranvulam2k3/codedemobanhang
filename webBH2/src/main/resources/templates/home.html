@@ -116,7 +116,7 @@
 									<h1>Nike New <br><h2 th:text="${newsp.ten}"></h2></h1>
 									<p th:text="${newsp.mota}"></p>
 									<div class="add-bag d-flex align-items-center">
-										<a class="add-btn" th:href="@{'/detel/' + ${newsp.id}}"><span class="lnr lnr-cross"></span></a>
+										<a class="add-btn" th:href="@{'/' + ${newsp.id}}"><span class="lnr lnr-cross"></span></a>
 										<span class="add-text text-uppercase">Chi tiết</span>
 									</div>
 								</div>
@@ -291,7 +291,7 @@
 										<span class="lnr lnr-sync"></span>
 										<p class="hover-text">compare</p>
 									</a>
-									<a th:href="@{'/detel/' + ${sp.id} }" class="social-info">
+									<a th:href="@{'/' + ${sp.id} }" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">view more</p>
 									</a>
