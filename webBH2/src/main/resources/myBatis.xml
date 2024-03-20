@@ -28,7 +28,7 @@
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
-    <table schema="dbo" tableName="hoten" domainObjectName="hoten" >
+    <table schema="dbo" tableName="account" domainObjectName="account" >
 
     </table>
 

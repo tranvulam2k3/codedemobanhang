@@ -8,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.webbh.dmBanhang.Model.account;
 import com.webbh.dmBanhang.Model.giay;
 import com.webbh.dmBanhang.Model.giayExample;
 import com.webbh.dmBanhang.Model.hoten;
 import com.webbh.dmBanhang.Model.sanpham;
 import com.webbh.dmBanhang.Model.sanphamExample;
+import com.webbh.dmBanhang.mapper.dbo.accountMapper;
 import com.webbh.dmBanhang.mapper.dbo.giayMapper;
 import com.webbh.dmBanhang.mapper.dbo.hotenMapper;
 import com.webbh.dmBanhang.mapper.dbo.sanphamMapper;
@@ -30,6 +33,10 @@ public class homeController {
 	
 	@Autowired
 	hotenMapper hotenMapper;
+	
+	@Autowired
+	accountMapper accountMapper;
+	
 	@GetMapping("/home")
 	public String home(Model model) {
 		List<sanpham> newsp = sanphamMapper.sanphammoi();
@@ -106,5 +113,24 @@ public class homeController {
 		sanpham sp = sanphamMapper.productByID(id);
 		model.addAttribute("sp", sp);
 		return "productDetel";
+	}
+	// đăng nhập đăng kí
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	@GetMapping("/sigup")
+	public String sigup() {
+		return "sigup";
+	}
+	@PostMapping("/checklogin")
+	public String checkLogin(Model model, @RequestParam("username") String username , @RequestParam("pass") String pass) {
+		account dn = accountMapper.checkLogin(username, pass);
+		if(dn != null) {
+			return "redirect:/home";
+		}else {
+			model.addAttribute("mess", "Error User or Pass");
+			return "login";
+		}
 	}
 }
