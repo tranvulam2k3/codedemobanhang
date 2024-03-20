@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet"
+		id="bootstrap-css">
+	<script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+	<script th:src="@{//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/dangnhap.css}" />
+</head>
+
+<body>
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<!-- Tabs Titles -->
+
+			<!-- Icon -->
+			<div class="icon">
+				<img th:src="@{/images/fevicon.png}" id="icon" alt="User Icon" /> ĐĂNG NHẬP
+			</div>
+
+			<!-- Login Form -->
+			<form th:action="@{/check}" method="post" th:object="${account}">
+				<p class="lam" th:text=" ${mess} "/>
+				<div>
+					<input type="text" th:field="*{username}" placeholder="Tên Đăng Nhập">
+					<br>
+					<td class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name
+						Error</td>
+				</div>
+				<div>
+					<input type="password" th:field="*{pass}" placeholder="Mật Khẩu">
+					<br>
+					<td class="error-message" th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}">Name Error</td>
+				</div>
+				<input type="submit" class="fadeIn fourth" value="Log In">
+			</form>
+
+			<!-- Remind Passowrd -->
+			<div id="formFooter">
+				<a class="underlineHover" th:href="@{create}">Sign Up</a>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

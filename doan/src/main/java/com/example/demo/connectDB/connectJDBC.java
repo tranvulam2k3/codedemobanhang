@@ -1,0 +1,28 @@
+package com.example.demo.connectDB;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class connectJDBC {
+	public static Connection getConnection() {
+		Connection con = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=banhang;user=sa;password=123123");
+			System.out.println("Thanh Cong");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return con;
+		
+	
+	}
+
+}
+	

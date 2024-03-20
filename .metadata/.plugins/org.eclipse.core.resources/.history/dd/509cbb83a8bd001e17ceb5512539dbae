@@ -1,0 +1,13 @@
+package com.shop.demoShop;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class NhaHang1Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(demoWeb1Application.class, args);
+	}
+
+}

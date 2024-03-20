@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" th:href="@{css/booking.css}">
+</head>
+
+<body>
+	<form th:action="@{/addthongtin}" class="login100-form validate-form" method="post">
+		<h2>THÔNG TIN KHÁCH HÀNG</h2>
+		<form>
+			<table id="thongtin">
+
+				<tr>
+					<td>ID</td>
+					<td>
+						<input type="text" name="id">
+					</td>
+				</tr>
+				<tr>
+					<td>Tên Cô Dâu</td>
+					<td>
+						<input type="text" name="tencodau">
+					</td>
+				</tr>
+				<tr>
+					<td>Tên Chú Rễ</td>
+					<td>
+						<input type="text" name="tenchure">
+					</td>
+				</tr>
+				<tr>
+					<td>Số Lượng Bàn</td>
+					<td>
+						<input type="text" name="soluongban">
+					</td>
+				</tr>
+				<tr>
+					<td>Đơn Giá</td>
+					<td>
+						<input type="text" name="dongia">
+					</td>
+				</tr>
+				<tr>
+					<td>Gói Dịch Vụ</td>
+					<td>
+						<input type="text" name="dichvudikem">
+					</td>
+				</tr>
+				<tr>
+					<td>Tiền Đặt Cọc</td>
+					<td>
+						<input type="text" name="tiendatcoc">
+					</td>
+				</tr>
+				<tr>
+					<td>Tiền Thanh Toán</td>
+					<td>
+						<input type="text" name="tienthanhtoan">
+					</td>
+				</tr>
+				<tr>
+					<td>Ghi Chú</td>
+					<td>
+						<input type="text" name="ghichu">
+					</td>
+				</tr>
+				<tr>
+					<td>Ngày Tổ Chúc</td>
+					<td>
+						<input type="text" name="thongtinthiepcuoi">
+					</td>
+				</tr>
+
+			</table>		
+			<div>
+				<button type="submit">
+					Đặt Lịch
+				</button>
+			</div>
+		</form>
+		<form id="dichvu">
+			<h2>GÓI DỊCH VỤ</h2>
+			<table>
+				<tr>
+					<th>STT</th>
+					<th>Gói Dịch Vụ</th>
+					<th>Giá</th>
+				</tr>
+				<div th:each="dv : ${dv}">
+					<tbody>
+						<td th:text="${dv.idDichvu}"></td>
+						<td th:text="${dv.tendichvu}"></td>
+						<td th:text="${dv.gia}"></td>
+					</tbody>
+				</div>
+			</table>
+		</form>
+
+
+
+
+
+
+</body>
+
+</html>

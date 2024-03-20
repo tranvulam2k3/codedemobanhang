@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{css/view.css}">
+</head>
+
+<body>
+	<div class="container">
+		<table>
+			<caption class="lam" style="caption-side: top">MẶT HÀNG</caption>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Tên Sản Phẩm</th>
+					<th>Giá</th>
+					<th>Mô tả</th>
+					<th>Chú ý</th>
+				</tr>
+			</thead>
+			<div th:each="sp : ${sp}" >
+				<tbody>
+
+					<!-- Nội dung bạn muốn hiển thị cho mỗi item -->
+					<td  th:text="${sp.id}"></td>
+					<td  th:text="${sp.tensanpham}"></td>
+					<td  th:text="${sp.gia}"></td>
+					<td  th:text="${sp.mota}"></td>
+					<td>
+						<a th:href="@{/add}">add</a>
+						<a th:href="@{'/updataSp/' + ${sp.id}}">update</a>
+						<a th:href="@{'/deleteSp/' + ${sp.id} + '/' + ${menu}} "> delete</a>
+					</td>
+
+				</tbody>
+			</div>
+		</table>
+	</div>
+
+
+
+</body>
+
+</html>

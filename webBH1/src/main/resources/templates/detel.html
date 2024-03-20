@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>eCommerce Product Detail</title>
+	<link th:href="@{/css/detel.css}" rel="stylesheet">
+	<link th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:400,700}" rel="stylesheet">
+	<link th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+	<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/index}">Furni<span>.</span></a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
+				aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarsFurni">
+				<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+					<li class="nav-item active">
+						<a class="nav-link" th:href="@{/index}">Home</a>
+					</li>
+					<li><a class="nav-link" th:href="@{/shop}">Shop</a></li>
+					<li><a class="nav-link" href="about.html">About us</a></li>
+					<li><a class="nav-link" href="services.html">Services</a></li>
+					<li><a class="nav-link" href="blog.html">Blog</a></li>
+					<li><a class="nav-link" href="contact.html">Contact us</a></li>
+				</ul>
+
+				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+					<li><a class="nav-link" th:href="@{/login}"><img th:src="@{images/user.svg}"></a></li>
+					<li><a class="nav-link" href="cart.html"><img th:src="@{images/cart.svg}"></a></li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+	<div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<form th:action="@{/addtocart}" method="post">
+					<div class="wrapper row" th:each="chitietsanpham :${chitietsanpham}">
+					<div class="preview col-md-6">
+
+						<div class="preview-pic tab-content">
+							<div class="tab-pane active" id="pic-1"><img th:src="${chitietsanpham.hinhanh}" /></div>
+						</div>
+
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title" th:text="${chitietsanpham.ten}"></h3>
+						<div class="rating">
+							<div class="stars">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<span class="review-no">41 reviews</span>
+						</div>
+						<p class="product-description" th:text="${chitietsanpham.mota}"></p>
+						<h4 class="price">current price: <span th:text="${chitietsanpham.gia} + '$'"></span></h4>
+						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong>
+						</p>
+						<div class="action">
+							<input type="hidden" name="hinhanhc" th:value="${chitietsanpham.hinhanh}" />
+							<input type="hidden" name="idsanpham" th:value="${chitietsanpham.id}" />
+							<input type="number" name="soluong" value="1" min="1" />
+							<button class="add-to-cart btn btn-default" type="submit">add to cart</button>
+							<button class="like btn btn-default" type="button"><span
+									class="fa fa-heart"></span></button>
+						</div>
+					</div>
+				</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<!-- Start Why Choose Us Section -->
+	<div class="why-choose-section">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-lg-6">
+					<h2 class="section-title">Why Choose Us</h2>
+					<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit
+						imperdiet dolor tempor tristique.</p>
+
+					<div class="row my-5">
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img th:src="@{images/truck.svg}" alt="Image" class="imf-fluid">
+								</div>
+								<h3>Fast &amp; Free Shipping</h3>
+								<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
+									vulputate.</p>
+							</div>
+						</div>
+
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="images/bag.svg" alt="Image" class="imf-fluid">
+								</div>
+								<h3>Easy to Shop</h3>
+								<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
+									vulputate.</p>
+							</div>
+						</div>
+
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="images/support.svg" alt="Image" class="imf-fluid">
+								</div>
+								<h3>24/7 Support</h3>
+								<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
+									vulputate.</p>
+							</div>
+						</div>
+
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="images/return.svg" alt="Image" class="imf-fluid">
+								</div>
+								<h3>Hassle Free Returns</h3>
+								<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
+									vulputate.</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-lg-5">
+					<div class="img-wrap">
+						<img src="images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- End Why Choose Us Section -->
+<!-- Start Popular Product -->
+	<div class="popular-product">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+					<div class="product-item-sm d-flex">
+						<div class="thumbnail">
+							<img th:src="@{images/product-1.png}" alt="Image" class="img-fluid">
+						</div>
+						<div class="pt-3">
+							<h3>Nordic Chair</h3>
+							<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio </p>
+							<p><a href="#">Read More</a></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+					<div class="product-item-sm d-flex">
+						<div class="thumbnail">
+							<img src="images/product-2.png" alt="Image" class="img-fluid">
+						</div>
+						<div class="pt-3">
+							<h3>Kruzo Aero Chair</h3>
+							<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio </p>
+							<p><a href="#">Read More</a></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+					<div class="product-item-sm d-flex">
+						<div class="thumbnail">
+							<img src="images/product-3.png" alt="Image" class="img-fluid">
+						</div>
+						<div class="pt-3">
+							<h3>Ergonomic Chair</h3>
+							<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio </p>
+							<p><a href="#">Read More</a></p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<!-- End Popular Product -->
+</body>
+
+</html>

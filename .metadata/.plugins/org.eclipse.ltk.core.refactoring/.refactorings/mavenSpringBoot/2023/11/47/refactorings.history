@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;mavenSpringBoot/src/main/resources/templates/indext.html&apos; to &apos;index.html&apos;" description="Rename resource &apos;indext.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/indext.html" name="index.html" stamp="1700751673636" updateReferences="true"/>
+</session>

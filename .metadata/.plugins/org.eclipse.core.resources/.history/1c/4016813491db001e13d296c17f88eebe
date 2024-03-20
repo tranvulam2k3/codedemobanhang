@@ -1,0 +1,63 @@
+package com.webbh.dmBanhang.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.webbh.dmBanhang.Model.giay;
+import com.webbh.dmBanhang.Model.giayExample;
+import com.webbh.dmBanhang.Model.sanpham;
+import com.webbh.dmBanhang.Model.sanphamExample;
+import com.webbh.dmBanhang.mapper.dbo.giayMapper;
+import com.webbh.dmBanhang.mapper.dbo.sanphamMapper;
+
+@Controller
+public class homeController {
+	
+	@Autowired
+	sanphamMapper sanphamMapper;
+	
+	@Autowired
+	giayMapper giayMapper;
+	
+	@GetMapping("/home")
+	public String home(Model model) {
+		List<sanpham> newsp = sanphamMapper.sanphammoi();
+		sanphamExample example = new sanphamExample();
+		List<sanpham> sp = sanphamMapper.selectByExample(example);
+		model.addAttribute("newsp", newsp);
+		model.addAttribute("sp", sp);
+		return "home";
+	}
+	
+	@GetMapping("/category")
+	public String category(Model model) {
+		sanphamExample example1 = new sanphamExample();
+		List<sanpham> sp = sanphamMapper.selectByExample(example1);
+		giayExample example = new giayExample();
+		List<giay> giay = giayMapper.selectByExample(example);
+		model.addAttribute("giay", giay);
+		model.addAttribute("sp", sp);
+		return "category";
+	}
+	
+	@GetMapping("/sanpham")
+	public String sanphambyid(Model model, @RequestParam("magiay") String magiay) {
+		if("1".equals(magiay)) {
+			
+			return "redirect:/category";
+		}
+		return "b";
+	}
+	
+	@GetMapping("/a")
+	public String a() {
+		return"a";
+	}
+	
+}

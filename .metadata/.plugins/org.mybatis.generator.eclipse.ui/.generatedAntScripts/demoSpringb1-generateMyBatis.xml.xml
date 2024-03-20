@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project default="generate">
+  <target name="generate">
+    <mybatis.generate configfile="C:\Users\Hi\Documents\workspace-spring-tool-suite-4-4.20.1.RELEASE\demoSpringb1\src\main\resources\generateMyBatis.xml" />
+  </target>
+</project>
