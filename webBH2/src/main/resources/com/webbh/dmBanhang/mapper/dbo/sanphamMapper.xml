@@ -294,8 +294,8 @@
 			<if test="manv != null">
 				maNV = #{manv,jdbcType=INTEGER},
 			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER} </update>
+		</set> where
+		id = #{id,jdbcType=INTEGER} </update>
 	<update id="updateByPrimaryKey"
 		parameterType="com.webbh.dmBanhang.Model.sanpham">
 		<!--
@@ -321,11 +321,41 @@
 	<select id="search"
 		parameterType="com.webbh.dmBanhang.Model.sanphamExample">
 		SELECT * FROM sanpham
-		where ten LIKE  + '%' + #{ten} + '%'
+		where ten LIKE + '%' + #{ten} + '%'
 	</select>
 	<select id="productByID"
 		parameterType="com.webbh.dmBanhang.Model.sanphamExample">
 		SELECT * FROM sanpham
 		where id = #{id}
 	</select>
+	<insert id="addsp" parameterType="com.webbh.dmBanhang.Model.sanpham">
+		insert
+		into
+		SanPham (ten , hinhanh , gia , mota , magiay, manv)
+		VALUES
+		(#{ten} , #{hinhanh} , #{gia} , #{mota} , #{magiay} , 1 )
+	</insert>
+	<update id="updatebyID" parameterType="com.webbh.dmBanhang.Model.sanpham">
+		UPDATE
+		SanPham
+		SET
+		ten = #{ten}, hinhanh = #{hinhanh}, gia= #{gia} , mota=#{mota} ,
+		maGiay=#{magiay}
+		WHERE
+		id=#{id};
+	</update>
+	<delete id="deletebyID" parameterType="com.webbh.dmBanhang.Model.sanpham">
+		delete from SanPham
+		where id = #{id}
+	</delete>
+	<select id="getAll" parameterType="com.webbh.dmBanhang.Model.sanphamExample">
+		SELECT * FROM SanPham
+	</select>
+	<select id="phantrang" parameterType="com.webbh.dmBanhang.Model.sanphamExample">
+		SELECT *
+		FROM SanPham
+		ORDER BY id
+		OFFSET #{offset} ROWS FETCH NEXT #{pagesize} ROWS ONLY;
+	</select>
+
 </mapper>

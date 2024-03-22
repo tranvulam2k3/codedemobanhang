@@ -101,4 +101,10 @@ public interface sanphamMapper {
     List<sanpham> getsanphamByID(@Param("magiay") String magiay);
     List<sanpham> search(@Param("ten") String ten);
     sanpham productByID(@Param("id") int id);
+    int addsp (@Param("ten") String ten,@Param("hinhanh") String hinhanh,@Param("gia") int gia,@Param("mota") String mota,@Param("magiay") int magiay);
+    sanpham findbyID(@Param("id") int id);
+    int updatebyID (@Param("ten") String ten,@Param("hinhanh") String hinhanh,@Param("gia") int gia,@Param("mota") String mota,@Param("magiay") int magiay,@Param("id") int id);
+    int deletebyID (@Param("id") int id);
+    List<sanpham> getAll();
+    List<sanpham> phantrang(@Param("offset") int offset , @Param("pagesize") int pagesize);
 }

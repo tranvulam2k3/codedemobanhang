@@ -6,11 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.webbh.dmBanhang.Model.account;
 import com.webbh.dmBanhang.Model.giay;
 import com.webbh.dmBanhang.Model.giayExample;
@@ -21,6 +24,8 @@ import com.webbh.dmBanhang.mapper.dbo.accountMapper;
 import com.webbh.dmBanhang.mapper.dbo.giayMapper;
 import com.webbh.dmBanhang.mapper.dbo.hotenMapper;
 import com.webbh.dmBanhang.mapper.dbo.sanphamMapper;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class homeController {
@@ -116,21 +121,89 @@ public class homeController {
 	}
 	// đăng nhập đăng kí
 	@GetMapping("/login")
-	public String login() {
+	public String login(account account) {
 		return "login";
 	}
-	@GetMapping("/sigup")
+	@GetMapping("/signup")
 	public String sigup() {
-		return "sigup";
+		return "signup";
 	}
 	@PostMapping("/checklogin")
-	public String checkLogin(Model model, @RequestParam("username") String username , @RequestParam("pass") String pass) {
-		account dn = accountMapper.checkLogin(username, pass);
-		if(dn != null) {
-			return "redirect:/home";
-		}else {
-			model.addAttribute("mess", "Error User or Pass");
+	public String checkLogin(@Valid account account, BindingResult bindingResult,
+			Model model, @RequestParam("username") String username , @RequestParam("pass") String pass) {
+		model.addAttribute("account", account );
+		if(bindingResult.hasErrors()) {
 			return "login";
+		}else {
+			account dn = accountMapper.checkLogin(username, pass);
+			if(dn != null) {
+				return "redirect:/home";
+			}else {
+				model.addAttribute("mess", "Error User or Pass");
+				return "login";
+			}
 		}
+	}
+	@PostMapping("/signup")
+	public String checkSigup(Model model, @RequestParam("username") String username , @RequestParam("pass") String pass ,@RequestParam("repass") String repass, @RequestParam("gmail") String gmail ) {
+		if(pass.equals(repass) == false) {
+			return "sigup";
+		}else {
+			account checkuser = accountMapper.checkuser(username);
+			if(checkuser == null) {
+				int sigup = accountMapper.signup(username, pass, repass, gmail);
+				return "login";
+			}			
+		}
+		return "signup";
+	}
+	//Thêm, Sửa , Xóa
+	@GetMapping("/crud")
+	public String crud(Model model, @RequestParam(name="offset" , defaultValue = "1") int offset , @RequestParam(name="pagesize" , defaultValue = "5") int pagesize) {
+		int page = (offset - 1) * pagesize;
+		List<sanpham> sp = sanphamMapper.phantrang(page, pagesize);
+		List<sanpham> getAll = sanphamMapper.getAll();
+		int sotrang;
+		if(getAll.size() % pagesize != 0) {
+			sotrang = getAll.size()/pagesize + 1;
+		}else {
+			sotrang = getAll.size()/pagesize;
+		}
+		model.addAttribute("sp", sp);
+		model.addAttribute("sotrang", sotrang);
+		model.addAttribute("offset", offset);
+		giayExample example2 = new giayExample();
+		List<giay> giay = giayMapper.selectByExample(example2);
+		model.addAttribute("giay", giay);
+		return "crud";
+	}
+	@PostMapping("/addSP")
+	public String addSP(Model model , @RequestParam("ten") String ten,
+			@RequestParam("hinhanh") String hinhanh, @RequestParam("gia") int gia, @RequestParam("mota") String mota,
+			@RequestParam("magiay") int magiay) {
+		int addsp = sanphamMapper.addsp(ten, hinhanh, gia, mota, magiay);
+		return "redirect:/crud";
+	}
+	@GetMapping("/edit/{id}")
+	public String editbyID(Model model, @PathVariable("id") int id) {
+		sanpham findbyid = sanphamMapper.productByID(id);
+		giayExample example2 = new giayExample();
+		List<giay> giay = giayMapper.selectByExample(example2);
+		model.addAttribute("findbyid", findbyid);
+		model.addAttribute("giay", giay);
+		return "edit";
+	}
+	@PostMapping("/updateSp")
+	public String updatesp(Model model , @RequestParam("ten") String ten,
+			@RequestParam("hinhanh") String hinhanh, @RequestParam("gia") int gia, @RequestParam("mota") String mota,
+			@RequestParam("magiay") int magiay , @RequestParam("id") int id) {
+		int update = sanphamMapper.updatebyID(ten, hinhanh, gia, mota, magiay , id);
+		return "redirect:/crud";
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public String deletebyID(Model model , @PathVariable("id") int id) {
+		int deletesp = sanphamMapper.deletebyID(id);
+		return "redirect:/crud";
 	}
 }

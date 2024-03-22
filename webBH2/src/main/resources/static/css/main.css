@@ -162,6 +162,12 @@ button:focus {
 .overflow-hidden {
   overflow: hidden; }
 
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
 .sample-text-area {
   background: #fff;
   padding: 100px 0 70px 0; }
