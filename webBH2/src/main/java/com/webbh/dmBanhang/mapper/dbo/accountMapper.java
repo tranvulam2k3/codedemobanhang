@@ -98,5 +98,5 @@ public interface accountMapper {
     int updateByPrimaryKey(account row);
     account checkLogin(@Param("username") String username , @Param("pass") String pass);
     account checkuser(@Param("username") String username);
-    int signup(@Param("username") String username , @Param("pass") String pass,@Param("repass") String repass, @Param("gmail") String gmail);
+    int signup(@Param("username") String username , @Param("pass") String pass,@Param("repass") String repass, @Param("email") String email);
 }

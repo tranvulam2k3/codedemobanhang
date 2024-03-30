@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -125,13 +126,29 @@ public class homeController {
 		return "login";
 	}
 	@GetMapping("/signup")
-	public String sigup() {
+	public String sigup(account account) {
 		return "signup";
 	}
+//	@PostMapping("/checklogin")
+//	public String checkLogin(@Validated account account, BindingResult bindingResult,
+//			Model model, @RequestParam("username") String username , @RequestParam("pass") String pass) {
+//		model.addAttribute("account", account );
+//		if(bindingResult.hasErrors()) {
+//				return "login";
+//		}else {
+//			account dn = accountMapper.checkLogin(username, pass);
+//			if(dn != null) {
+//				return "redirect:/home";
+//			}else {
+//				model.addAttribute("mess", "Error User or Pass");
+//				return "login";
+//			}
+//		}
+//	}
 	@PostMapping("/checklogin")
-	public String checkLogin(@Valid account account, BindingResult bindingResult,
+	public String checkSigup(@Validated account account , BindingResult bindingResult,
 			Model model, @RequestParam("username") String username , @RequestParam("pass") String pass) {
-		model.addAttribute("account", account );
+		model.addAttribute("account", account);
 		if(bindingResult.hasErrors()) {
 			return "login";
 		}else {
@@ -142,20 +159,26 @@ public class homeController {
 				model.addAttribute("mess", "Error User or Pass");
 				return "login";
 			}
-		}
+		}		
 	}
 	@PostMapping("/signup")
-	public String checkSigup(Model model, @RequestParam("username") String username , @RequestParam("pass") String pass ,@RequestParam("repass") String repass, @RequestParam("gmail") String gmail ) {
-		if(pass.equals(repass) == false) {
-			return "sigup";
+	public String checkSigup(@Validated account account , BindingResult bindingResult,
+			Model model, @RequestParam("username") String username , @RequestParam("pass") String pass ,@RequestParam("repass") String repass, @RequestParam("email") String email ) {
+		model.addAttribute("account", account);
+		if(bindingResult.hasErrors()) {
+			return "signup";
 		}else {
-			account checkuser = accountMapper.checkuser(username);
-			if(checkuser == null) {
-				int sigup = accountMapper.signup(username, pass, repass, gmail);
-				return "login";
-			}			
-		}
-		return "signup";
+			if(pass.equals(repass) == false) {
+				return "signup";
+			}else {
+				account checkuser = accountMapper.checkuser(username);
+				if(checkuser == null) {
+					int sigup = accountMapper.signup(username, pass, repass, email);
+					return "login";
+				}			
+			}
+			return "signup";
+		}		
 	}
 	//Thêm, Sửa , Xóa
 	@GetMapping("/crud")

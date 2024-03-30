@@ -314,6 +314,6 @@
 	  		into 
 	  			account (username , pass , isSell , isAdmin , Email)
 				VALUES 
-					(#{username},#{pass},0,0,#{gmail})
+					(#{username},#{pass},0,0,#{email})
   </insert>
 </mapper>
