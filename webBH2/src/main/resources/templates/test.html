@@ -62,7 +62,7 @@
 						<tr>
 							
 							<th>HoVSTen</th>
-							<th>Image</th>
+							<th>SĐT</th>
 							<th>Gia</th>
 							<th>Actions</th>
 						</tr>
@@ -70,6 +70,9 @@
 					<tbody>
 						<tr th:each="hoTenList :${hoTenList}">						
 							<td th:text="${hoTenList}"></td>							
+						</tr>
+						<tr th:each="sdtList :${sdtList}">
+							<td th:text="${sdtList}"></td>
 						</tr>
 					</tbody>
 				</table>

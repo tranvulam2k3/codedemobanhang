@@ -4191,10 +4191,14 @@ label {
   vertical-align: middle;
   align-self: center; }
   .cart_inner .table tbody tr td .media .d-flex {
-    padding-right: 30px; }
+    padding-right: 50px; }
     .cart_inner .table tbody tr td .media .d-flex img {
       border: 1px solid #eeeeee;
       border-radius: 3px; }
+      .cart-item img {
+    max-width: 100px; /* Đặt kích thước tối đa cho chiều rộng của ảnh */
+    max-height: 100px; /* Đặt kích thước tối đa cho chiều cao của ảnh */
+}
   .cart_inner .table tbody tr td .media .media-body {
     vertical-align: middle;
     align-self: center; }

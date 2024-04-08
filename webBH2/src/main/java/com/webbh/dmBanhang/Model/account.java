@@ -1,10 +1,13 @@
 package com.webbh.dmBanhang.Model;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Validated
@@ -12,22 +15,22 @@ public class account {
 
     private Integer aid;
 
-    @NotEmpty(message = "Name is required")
+    @NotBlank(message = "Name is required")
     private String username;
-
-    @NotEmpty(message = "Name is required")
-    @Size(min = 6, message = "Password must be at least 6 characters long")
+    
+    @NotNull	
+    @Pattern(regexp = "^.{6,}$", message = "Password must be at least 6 characters long")
     private String pass;
 
     private Integer issell;
 
     private Integer isadmin;
 
-//    @NotEmpty(message = "Name is required")
-//    @Email(message = "...@gmail.com")
+    @NotBlank(message = "Name is required")
+    @Email(message = "...@gmail.com")
     private String email;
     
-//    @NotEmpty(message = "Name is required")
+    @NotBlank(message = "Name is required")
     private String repass;
 
     public Integer getAid() {

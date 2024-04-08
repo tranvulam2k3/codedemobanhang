@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<body>
+	<form th:action="@{/save}" method="post">
+		<label for="cars">Tháng:</label>
+		<select name="thang" id="cars">
+			<option th:value="1">1</option>
+			<option th:value="2">2</option>
+			<option th:value="3">3</option>
+			<option th:value="4">4</option>
+			<option th:value="5">5</option>
+			<option th:value="6">6</option>
+			<option th:value="7">7</option>
+			<option th:value="8">8</option>
+			<option th:value="9">9</option>
+			<option th:value="10">10</option>
+			<option th:value="11">11</option>
+			<option th:value="12">12</option>
+		</select>
+		<br><br>
+		<input type="checkbox" id="vehicle1" name="tuan" value="1">
+		<label for="vehicle1"> Tuần 1 </label><br>
+		<input type="checkbox" id="vehicle2" name="tuan" value="2">
+		<label for="vehicle2"> Tuần 2 </label><br>
+		<input type="checkbox" id="vehicle3" name="tuan" value="3">
+		<label for="vehicle3"> Tuần 3 </label><br>
+		<input type="checkbox" id="vehicle4" name="tuan" value="4">
+		<label for="vehicle4"> Tuần 4 </label><br><br>
+		<input type="submit" value="Submit">
+	</form>
+	<p th:text="${result}"></p>
+</body>
+
+</html>
